@@ -11,11 +11,87 @@
       <stringProp name="TestPlan.user_define_classpath"></stringProp>
     </TestPlan>
     <hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Register registrars thread group" enabled="true">
+      <SetupThreadGroup guiclass="SetupThreadGroupGui" testclass="SetupThreadGroup" testname="setUp Thread Group" enabled="true">
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
           <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <longProp name="ThreadGroup.start_time">1489715249000</longProp>
+        <longProp name="ThreadGroup.end_time">1489715249000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </SetupThreadGroup>
+      <hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="login" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">{&#xd;
+	&quot;client_id&quot;: &quot;f2pQL6jMgGQLDsNlHfhQgsmMVGzMcgmg&quot;,&#xd;
+	&quot;username&quot; : &quot;dcpost@ucalgary.ca&quot;,&#xd;
+	&quot;password&quot; : &quot;Blockvote2017&quot;,&#xd;
+	&quot;id_token&quot; : &quot;null&quot;,&#xd;
+	&quot;connection&quot;: &quot;Username-Password-Authentication&quot;,&#xd;
+	&quot;grant_type&quot;: &quot;password&quot;,&#xd;
+	&quot;scope&quot; : &quot;openid&quot;,&#xd;
+	&quot;device&quot;: &quot;null&quot;&#xd;
+}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">enel500blockvote.auth0.com</stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          <stringProp name="HTTPSampler.protocol">https</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">/oauth/ro</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <boolProp name="HTTPSampler.monitor">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+            <collectionProp name="HeaderManager.headers">
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">Content-Type</stringProp>
+                <stringProp name="Header.value">application/json</stringProp>
+              </elementProp>
+            </collectionProp>
+          </HeaderManager>
+          <hashTree/>
+          <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="JSON Extractor" enabled="true">
+            <stringProp name="JSONPostProcessor.referenceNames">id_token</stringProp>
+            <stringProp name="JSONPostProcessor.jsonPathExprs">$.id_token</stringProp>
+            <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
+            <stringProp name="JSONPostProcessor.defaultValues">NO_TOKEN</stringProp>
+          </JSONPostProcessor>
+          <hashTree/>
+          <BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="BeanShell PostProcessor" enabled="true">
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <boolProp name="resetInterpreter">false</boolProp>
+            <stringProp name="script">${__setProperty(id_token, ${id_token})};</stringProp>
+          </BeanShellPostProcessor>
+          <hashTree/>
+        </hashTree>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Register registrars thread group" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">0</stringProp>
         </elementProp>
         <stringProp name="ThreadGroup.num_threads">1</stringProp>
         <stringProp name="ThreadGroup.ramp_time">1</stringProp>
@@ -217,7 +293,7 @@ props.put(&quot;district&quot; + counter, district);</stringProp>
                 <stringProp name="Argument.value">{&#xd;
 	&quot;region&quot;:&quot;${__property(region0)}&quot;,&#xd;
 	&quot;govID&quot;: &quot;${userCounter}&quot;,&#xd;
-	&quot;registrarName&quot;:&quot;${__property(regName0)}&quot;&#xd;
+	&quot;registrarName&quot;:&quot;dcpost&quot;&#xd;
 }&#xd;
 </stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
@@ -245,6 +321,10 @@ props.put(&quot;district&quot; + counter, district);</stringProp>
               <elementProp name="" elementType="Header">
                 <stringProp name="Header.name">Content-Type</stringProp>
                 <stringProp name="Header.value">application/json</stringProp>
+              </elementProp>
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">Authorization</stringProp>
+                <stringProp name="Header.value">Bearer ${__property(id_token)}</stringProp>
               </elementProp>
             </collectionProp>
           </HeaderManager>
@@ -323,7 +403,7 @@ props.put(&quot;district&quot; + counter, district);</stringProp>
               </elementProp>
               <elementProp name="registrarName" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">${__property(regName0)}</stringProp>
+                <stringProp name="Argument.value">dcpost</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
                 <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 <stringProp name="Argument.name">registrarName</stringProp>
@@ -377,18 +457,10 @@ AsymmetricCipherKeyPair keys = generator.generateKeyPair();
 RSAKeyParameters publicKey=(RSAKeyParameters) keys.getPublic();
 RSAKeyParameters privateKey=(RSAKeyParameters) keys.getPrivate();*/
 
-String pubKeyMod = props.get(&quot;pubKeyMod0&quot;);
-
-String pubKeyExp = props.get(&quot;pubKeyExp0&quot;);
-
-String privKeyMod = props.get(&quot;privKeyMod0&quot;);
-
-String privKeyExp = props.get(&quot;privKeyExp0&quot;);
-
-IRegistrar registrar=new Registrar(new BigInteger(Base64.decode(pubKeyMod)), 
-							new BigInteger(Base64.decode(pubKeyExp)), 
-							new BigInteger(Base64.decode(privKeyMod)), 
-							new BigInteger(Base64.decode(privKeyExp)));
+IRegistrar registrar=new Registrar(new BigInteger(Base64.decode(&quot;AKBDi814o+/Ujo8bF1qjMnyotruZHLv5FWl/xYYFpKLgU4jmeXxhJKY36kmJFK+Kxt6anqmmVBKVZityfp+2lUzojYEJJ9Jzv4qQQQ4BcHijlrrBSvvWZ6KOVB30n2Lgxj99g6B1Eopyq4h+6TC3Sr/DBIkZ0tAH5a3+RG3Q8OEcYGpCQu7v4MIOgF+bFikeu6gk0Mob71TlPGauAIFpc4q3UVBjhbEIyc6vv76Z+RtNd3FZZzsLphzrJB4s6b6TwKpUsIWJ7dXBpkCSVv/sDtB4PeOrzHTH5UHGYkTLbF4o1ie23mbjhIWcSJryJrS+3VMaNuB+waImz/nlJEh/qy0=&quot;)), 
+							new BigInteger(Base64.decode(&quot;AQAB&quot;)), 
+							new BigInteger(Base64.decode(&quot;AKBDi814o+/Ujo8bF1qjMnyotruZHLv5FWl/xYYFpKLgU4jmeXxhJKY36kmJFK+Kxt6anqmmVBKVZityfp+2lUzojYEJJ9Jzv4qQQQ4BcHijlrrBSvvWZ6KOVB30n2Lgxj99g6B1Eopyq4h+6TC3Sr/DBIkZ0tAH5a3+RG3Q8OEcYGpCQu7v4MIOgF+bFikeu6gk0Mob71TlPGauAIFpc4q3UVBjhbEIyc6vv76Z+RtNd3FZZzsLphzrJB4s6b6TwKpUsIWJ7dXBpkCSVv/sDtB4PeOrzHTH5UHGYkTLbF4o1ie23mbjhIWcSJryJrS+3VMaNuB+waImz/nlJEh/qy0=&quot;)), 
+							new BigInteger(Base64.decode(&quot;GsCDuPoDJZDd9invyU+2KQRxslmB6CfRSPHM600MWSrojtDoJRjDKSLqzzkcdJwOC9EUHJ4Y6Rw6uJRtaiQsgnDMVCaO2Oy847imP1wCpgSqr8R9y5GT7ZjkFjcEFxmNxkHho7p/LJCtLQUAUIM8LUv0uR0QKW00DAoGaq1m1DCog+PzxRhsJvx6zx6yw7+xwyKd1udXErACRVyvplJ7nFvcfBSC0fp4V3kf1OxUbLAxPVYxiD2LXq6ND3GQY0kT+WueHd5AKSBXv3a21KRXLrhUn22EYsm3oY6pAD/6WiwXdmMpdqgA8NeLOD0O8qbpZogM8VRwuKV4fZZ1fpLeCQ==&quot;)));
 BlindedToken blindedToken = new BlindedToken(registrar.getPublic());
 
 // Generate a token request.
