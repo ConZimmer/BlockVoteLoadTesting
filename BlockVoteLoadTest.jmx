@@ -254,7 +254,7 @@ props.put(&quot;district&quot; + counter, district);</stringProp>
           <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
         </HTTPSamplerProxy>
         <hashTree/>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="get Registrar Info Request" enabled="false">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="get Registrar Info Request" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments"/>
           </elementProp>
@@ -330,83 +330,20 @@ props.put(&quot;district&quot; + counter, district);</stringProp>
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="voter reg record Request" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Write Vote Request" enabled="true">
           <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
             <collectionProp name="Arguments.arguments">
               <elementProp name="" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
                 <stringProp name="Argument.value">{&#xd;
-	&quot;govID&quot;:&quot;${userCounter}&quot;&#xd;
-}&#xd;
-</stringProp>
+	&quot;region&quot;:&quot;${__property(region0)}&quot;,&#xd;
+	&quot;signedTokenID&quot;:&quot;${TOKEN_ID}&quot;,&#xd;
+	&quot;signedTokenSig&quot;:&quot;${TOKEN_SIG}&quot;,&#xd;
+	&quot;vote&quot;:&quot;${VOTE_CHOICE}&quot;,&#xd;
+	&quot;registrarName&quot;:&quot;dcpost&quot;&#xd;
+}</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
-              </elementProp>
-            </collectionProp>
-          </elementProp>
-          <stringProp name="HTTPSampler.domain">blockvotenode2.mybluemix.net</stringProp>
-          <stringProp name="HTTPSampler.port"></stringProp>
-          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-          <stringProp name="HTTPSampler.response_timeout"></stringProp>
-          <stringProp name="HTTPSampler.protocol"></stringProp>
-          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">/VoterRegRecord</stringProp>
-          <stringProp name="HTTPSampler.method">POST</stringProp>
-          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-          <boolProp name="HTTPSampler.monitor">false</boolProp>
-          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-        </HTTPSamplerProxy>
-        <hashTree>
-          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
-            <collectionProp name="HeaderManager.headers">
-              <elementProp name="" elementType="Header">
-                <stringProp name="Header.name">Content-Type</stringProp>
-                <stringProp name="Header.value">application/json</stringProp>
-              </elementProp>
-            </collectionProp>
-          </HeaderManager>
-          <hashTree/>
-        </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Write Vote Request" enabled="true">
-          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
-            <collectionProp name="Arguments.arguments">
-              <elementProp name="region" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">${__property(region0)}</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                <stringProp name="Argument.name">region</stringProp>
-              </elementProp>
-              <elementProp name="signedTokenID" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">${TOKEN_ID}</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                <stringProp name="Argument.name">signedTokenID</stringProp>
-              </elementProp>
-              <elementProp name="signedTokenSig" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">${TOKEN_SIG}</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                <stringProp name="Argument.name">signedTokenSig</stringProp>
-              </elementProp>
-              <elementProp name="vote" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">${VOTE_CHOICE}</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                <stringProp name="Argument.name">vote</stringProp>
-              </elementProp>
-              <elementProp name="registrarName" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">dcpost</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                <stringProp name="Argument.name">registrarName</stringProp>
               </elementProp>
             </collectionProp>
           </elementProp>
@@ -457,10 +394,16 @@ AsymmetricCipherKeyPair keys = generator.generateKeyPair();
 RSAKeyParameters publicKey=(RSAKeyParameters) keys.getPublic();
 RSAKeyParameters privateKey=(RSAKeyParameters) keys.getPrivate();*/
 
-IRegistrar registrar=new Registrar(new BigInteger(Base64.decode(&quot;AKBDi814o+/Ujo8bF1qjMnyotruZHLv5FWl/xYYFpKLgU4jmeXxhJKY36kmJFK+Kxt6anqmmVBKVZityfp+2lUzojYEJJ9Jzv4qQQQ4BcHijlrrBSvvWZ6KOVB30n2Lgxj99g6B1Eopyq4h+6TC3Sr/DBIkZ0tAH5a3+RG3Q8OEcYGpCQu7v4MIOgF+bFikeu6gk0Mob71TlPGauAIFpc4q3UVBjhbEIyc6vv76Z+RtNd3FZZzsLphzrJB4s6b6TwKpUsIWJ7dXBpkCSVv/sDtB4PeOrzHTH5UHGYkTLbF4o1ie23mbjhIWcSJryJrS+3VMaNuB+waImz/nlJEh/qy0=&quot;)), 
-							new BigInteger(Base64.decode(&quot;AQAB&quot;)), 
-							new BigInteger(Base64.decode(&quot;AKBDi814o+/Ujo8bF1qjMnyotruZHLv5FWl/xYYFpKLgU4jmeXxhJKY36kmJFK+Kxt6anqmmVBKVZityfp+2lUzojYEJJ9Jzv4qQQQ4BcHijlrrBSvvWZ6KOVB30n2Lgxj99g6B1Eopyq4h+6TC3Sr/DBIkZ0tAH5a3+RG3Q8OEcYGpCQu7v4MIOgF+bFikeu6gk0Mob71TlPGauAIFpc4q3UVBjhbEIyc6vv76Z+RtNd3FZZzsLphzrJB4s6b6TwKpUsIWJ7dXBpkCSVv/sDtB4PeOrzHTH5UHGYkTLbF4o1ie23mbjhIWcSJryJrS+3VMaNuB+waImz/nlJEh/qy0=&quot;)), 
-							new BigInteger(Base64.decode(&quot;GsCDuPoDJZDd9invyU+2KQRxslmB6CfRSPHM600MWSrojtDoJRjDKSLqzzkcdJwOC9EUHJ4Y6Rw6uJRtaiQsgnDMVCaO2Oy847imP1wCpgSqr8R9y5GT7ZjkFjcEFxmNxkHho7p/LJCtLQUAUIM8LUv0uR0QKW00DAoGaq1m1DCog+PzxRhsJvx6zx6yw7+xwyKd1udXErACRVyvplJ7nFvcfBSC0fp4V3kf1OxUbLAxPVYxiD2LXq6ND3GQY0kT+WueHd5AKSBXv3a21KRXLrhUn22EYsm3oY6pAD/6WiwXdmMpdqgA8NeLOD0O8qbpZogM8VRwuKV4fZZ1fpLeCQ==&quot;)));
+String modulus = &quot;ALUNsOBF0ziC5rRU3V5ozQtdPeRMZWIFMU6hOC8IWLED2YycfjzNlLNRniv/IhCWYNgaRUDqBPsVwSXQSiOBU2/j4F8eBpsxFHo3YEpiaUGOm920xk8gyJk4aC3QZ+lscTDGuyUWZzT9fy9eGAWp09YZvjv6Z5dMJ/157Eh4UbKorAHG34c5pLH4cPbloRd9ZTZ9CujdYlKpKXwUNjwKj6aqUQkSuCsXwpYC4X60A6O2OsIF9bZXtog/zSJzkzTHtaTaqUCMhfYLNuGfvWdtLzp/Q0TonxlF3PP8Isxn/xafXULBB6UETKkAKYBYKkkOCvvGR9kljGYXGs6CF1xfK9M=&quot;;
+
+String publicExponent = &quot;AQAB&quot;;
+
+String privateExponent = &quot;G2jGsbUwbFo41e0RFEVWYVWM1J6SLJwvokE68bfYQXgdO7HHVKokzF7bTLrTq+IwKBcWC+VBusdI1dIqHyTpfkNnyM6RXnY4LOZsP+aVG7UcuJww93K1m6iT8Pefe5GMsz8qvssc9cM4uXGLvnO+26dLCuZ2P0vqs+98y13XtG2eEpmT+RM9IqpidefKcCnCLY8Zrn08LCqmX8OnEmottsgNDpCkgcGfbxZNp/b0U7IvxQbG07X/3suUgiyAgf3gGabxISg1eSwu1WSA5Bz1XTKXy+mA2utqTINPcSdoAfaVK36JIbqqK6Z+uskh8s2oOn5HTBEg2QiEcNhGUFtGVQ==&quot;;
+
+IRegistrar registrar=new Registrar(new BigInteger(Base64.decode(modulus)), 
+							new BigInteger(Base64.decode(publicExponent)), 
+							new BigInteger(Base64.decode(modulus)), 
+							new BigInteger(Base64.decode(privateExponent)));
 BlindedToken blindedToken = new BlindedToken(registrar.getPublic());
 
 // Generate a token request.
@@ -491,7 +434,7 @@ vars.put(&quot;VOTE_CHOICE&quot;, choice);</stringProp>
             <collectionProp name="HeaderManager.headers">
               <elementProp name="" elementType="Header">
                 <stringProp name="Header.name">Content-Type</stringProp>
-                <stringProp name="Header.value">application/x-www-form-urlencoded</stringProp>
+                <stringProp name="Header.value">application/json</stringProp>
               </elementProp>
             </collectionProp>
           </HeaderManager>
@@ -517,8 +460,48 @@ vars.put(&quot;VOTE_CHOICE&quot;, choice);</stringProp>
           <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
         </HTTPSamplerProxy>
         <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="voter reg record Request" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">{&#xd;
+	&quot;govID&quot;:&quot;${userCounter}&quot;&#xd;
+}&#xd;
+</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">blockvotenode2.mybluemix.net</stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">/VoterRegRecord</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <boolProp name="HTTPSampler.monitor">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+            <collectionProp name="HeaderManager.headers">
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">Content-Type</stringProp>
+                <stringProp name="Header.value">application/json</stringProp>
+              </elementProp>
+            </collectionProp>
+          </HeaderManager>
+          <hashTree/>
+        </hashTree>
         <CounterConfig guiclass="CounterConfigGui" testclass="CounterConfig" testname="User Counter" enabled="true">
-          <stringProp name="CounterConfig.start">0</stringProp>
+          <stringProp name="CounterConfig.start">403</stringProp>
           <stringProp name="CounterConfig.end"></stringProp>
           <stringProp name="CounterConfig.incr">1</stringProp>
           <stringProp name="CounterConfig.name">userCounter</stringProp>
