@@ -223,9 +223,9 @@ props.put(&quot;district&quot; + counter, district);</stringProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
-          <stringProp name="LoopController.loops">1</stringProp>
+          <stringProp name="LoopController.loops">100</stringProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.num_threads">4</stringProp>
         <stringProp name="ThreadGroup.ramp_time">1</stringProp>
         <longProp name="ThreadGroup.start_time">1486959583000</longProp>
         <longProp name="ThreadGroup.end_time">1486959583000</longProp>
@@ -293,7 +293,7 @@ props.put(&quot;district&quot; + counter, district);</stringProp>
                 <stringProp name="Argument.value">{&#xd;
 	&quot;region&quot;:&quot;${__property(region0)}&quot;,&#xd;
 	&quot;govID&quot;: &quot;${userCounter}&quot;,&#xd;
-	&quot;registrarName&quot;:&quot;dcpost&quot;&#xd;
+	&quot;registrarName&quot;:&quot;${registrarName}&quot;&#xd;
 }&#xd;
 </stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
@@ -341,7 +341,7 @@ props.put(&quot;district&quot; + counter, district);</stringProp>
 	&quot;signedTokenID&quot;:&quot;${TOKEN_ID}&quot;,&#xd;
 	&quot;signedTokenSig&quot;:&quot;${TOKEN_SIG}&quot;,&#xd;
 	&quot;vote&quot;:&quot;${VOTE_CHOICE}&quot;,&#xd;
-	&quot;registrarName&quot;:&quot;dcpost&quot;&#xd;
+	&quot;registrarName&quot;:&quot;${registrarName}&quot;&#xd;
 }</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
@@ -384,21 +384,27 @@ import tokens.BlindedToken;
 import tokens.Token;
 import tokens.TokenRequest;
 
-/*
-RSAKeyPairGenerator generator = new RSAKeyPairGenerator();
-generator.init(new RSAKeyGenerationParameters(
-			new BigInteger(&quot;10001&quot;, 16), new SecureRandom(), 2048,
-			80));
+String[] options = {&quot;Breaking Bad&quot;,
+        &quot;Mr Robot&quot;,
+        &quot;Rick and Morty&quot;,
+        &quot;Bojack Horseman&quot;,
+        &quot;House of Cards&quot;,
+        &quot;Game of Thrones&quot;,
+        &quot;Family Guy&quot;,
+        &quot;The Simpsons&quot;,
+        &quot;South Park&quot;,
+        &quot;The Sopranos&quot;,
+        &quot;Sherlock&quot;,
+        &quot;Firefly&quot;,
+        &quot;WestWorld&quot;,
+        &quot;Arrested Development&quot;,
+        &quot;Narcos&quot;,
+        &quot;Seinfeld&quot;};
+String modulus = vars.get(&quot;modulus&quot;);
 
-AsymmetricCipherKeyPair keys = generator.generateKeyPair();
-RSAKeyParameters publicKey=(RSAKeyParameters) keys.getPublic();
-RSAKeyParameters privateKey=(RSAKeyParameters) keys.getPrivate();*/
+String publicExponent = vars.get(&quot;publicExponent&quot;);
 
-String modulus = &quot;ALUNsOBF0ziC5rRU3V5ozQtdPeRMZWIFMU6hOC8IWLED2YycfjzNlLNRniv/IhCWYNgaRUDqBPsVwSXQSiOBU2/j4F8eBpsxFHo3YEpiaUGOm920xk8gyJk4aC3QZ+lscTDGuyUWZzT9fy9eGAWp09YZvjv6Z5dMJ/157Eh4UbKorAHG34c5pLH4cPbloRd9ZTZ9CujdYlKpKXwUNjwKj6aqUQkSuCsXwpYC4X60A6O2OsIF9bZXtog/zSJzkzTHtaTaqUCMhfYLNuGfvWdtLzp/Q0TonxlF3PP8Isxn/xafXULBB6UETKkAKYBYKkkOCvvGR9kljGYXGs6CF1xfK9M=&quot;;
-
-String publicExponent = &quot;AQAB&quot;;
-
-String privateExponent = &quot;G2jGsbUwbFo41e0RFEVWYVWM1J6SLJwvokE68bfYQXgdO7HHVKokzF7bTLrTq+IwKBcWC+VBusdI1dIqHyTpfkNnyM6RXnY4LOZsP+aVG7UcuJww93K1m6iT8Pefe5GMsz8qvssc9cM4uXGLvnO+26dLCuZ2P0vqs+98y13XtG2eEpmT+RM9IqpidefKcCnCLY8Zrn08LCqmX8OnEmottsgNDpCkgcGfbxZNp/b0U7IvxQbG07X/3suUgiyAgf3gGabxISg1eSwu1WSA5Bz1XTKXy+mA2utqTINPcSdoAfaVK36JIbqqK6Z+uskh8s2oOn5HTBEg2QiEcNhGUFtGVQ==&quot;;
+String privateExponent = vars.get(&quot;privateExponent&quot;);
 
 IRegistrar registrar=new Registrar(new BigInteger(Base64.decode(modulus)), 
 							new BigInteger(Base64.decode(publicExponent)), 
@@ -416,14 +422,8 @@ byte[] signature = registrar.sign(tokenRequest);
 Token token = blindedToken.unblindToken(signature);
 
 Random rand = new Random();
-int i = rand.nextInt(3);
-String choice;
-if(i == 0)
-	choice = &quot;yes&quot;;
-else if (i == 1)
-	choice = &quot;no&quot;;
-else 
-	choice = &quot;maybe&quot;;
+int i = rand.nextInt(16);
+String choice = options[i];
 
 vars.put(&quot;TOKEN_ID&quot;, Base64.toBase64String(token.getID()));
 vars.put(&quot;TOKEN_SIG&quot;, Base64.toBase64String(token.getSignature()));
@@ -501,13 +501,38 @@ vars.put(&quot;VOTE_CHOICE&quot;, choice);</stringProp>
           <hashTree/>
         </hashTree>
         <CounterConfig guiclass="CounterConfigGui" testclass="CounterConfig" testname="User Counter" enabled="true">
-          <stringProp name="CounterConfig.start">403</stringProp>
+          <stringProp name="CounterConfig.start">500</stringProp>
           <stringProp name="CounterConfig.end"></stringProp>
           <stringProp name="CounterConfig.incr">1</stringProp>
           <stringProp name="CounterConfig.name">userCounter</stringProp>
           <stringProp name="CounterConfig.format"></stringProp>
           <boolProp name="CounterConfig.per_user">false</boolProp>
         </CounterConfig>
+        <hashTree/>
+        <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+          <collectionProp name="Arguments.arguments">
+            <elementProp name="modulus" elementType="Argument">
+              <stringProp name="Argument.name">modulus</stringProp>
+              <stringProp name="Argument.value">ALIgdt3Gx9UMqfLwPMDw8U1v0X0ah5+ZII8AV/Ung/05LTxbudeLF2Cct6UtSz/C0s4uyZiGRxdyoJs+m4V0YB86qalLGjAo3CsJe7ge/to+lKYwQ9Tp/3Xm42Q3bMNg72rkuSYdQaSLN1Qil60pfk7tzb0l76MIv4LaR0W3+0/7p6XexMmU7ZUAsS0yXiPXI17GgE8dWc7L4qZjPbpzFD9Q/dDEfqXk6r/NKkOsHOB0VpOX4AeIIo3OuSYebt//zQVr7BHPL+eaS8WGu18FOfRSPM5s9ajaZCLfaQiQTvDpg+WnGQNMdiiqz1OF8EBf/jPlmvMRw52e7Krd8Thi7P8=</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="privateExponent" elementType="Argument">
+              <stringProp name="Argument.name">privateExponent</stringProp>
+              <stringProp name="Argument.value">Ah022/NShtmjdhHaNBNdVyUccDwtijw33Iqiq0hgnX5IEP8pCau0ciiaA2Ncu8Z/ra50z73JlTfT5n52kRMXBaKIG01xY6CbMFrooCr6Al7GG+Isbpf9DgoDU+VWgfZ3ZlDi+QFVjfLltrbBucPpebKtLkayJ+tgKS5BtKGg4XZJkQaYdh1gsiz2qYLqX3BGEWvxH4z5HVup7xCj8XBF/LwxvXR/O/hVCY774E6iA7icXes1odolflZOjnb3kBxgC31ZE3fWILFIKMIT5dJLHOrQjCiC2CqGmE0fQy5Ozfp3c3c68p3BWvMRt4KQ6mbFoLzNpCXvz+8x83qiRwqbcQ==</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="publicExponent" elementType="Argument">
+              <stringProp name="Argument.name">publicExponent</stringProp>
+              <stringProp name="Argument.value">AQAB</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="registrarName" elementType="Argument">
+              <stringProp name="Argument.name">registrarName</stringProp>
+              <stringProp name="Argument.value">test1</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+          </collectionProp>
+        </Arguments>
         <hashTree/>
       </hashTree>
       <ResultCollector guiclass="RespTimeGraphVisualizer" testclass="ResultCollector" testname="Response Time Graph" enabled="true">
