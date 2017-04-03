@@ -223,9 +223,9 @@ props.put(&quot;district&quot; + counter, district);</stringProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
-          <stringProp name="LoopController.loops">100</stringProp>
+          <stringProp name="LoopController.loops">400</stringProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">4</stringProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
         <stringProp name="ThreadGroup.ramp_time">1</stringProp>
         <longProp name="ThreadGroup.start_time">1486959583000</longProp>
         <longProp name="ThreadGroup.end_time">1486959583000</longProp>
@@ -253,6 +253,10 @@ props.put(&quot;district&quot; + counter, district);</stringProp>
           <boolProp name="HTTPSampler.monitor">false</boolProp>
           <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
         </HTTPSamplerProxy>
+        <hashTree/>
+        <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Constant Timer" enabled="true">
+          <stringProp name="ConstantTimer.delay">1000</stringProp>
+        </ConstantTimer>
         <hashTree/>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="get Registrar Info Request" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
@@ -284,6 +288,10 @@ props.put(&quot;district&quot; + counter, district);</stringProp>
           </HeaderManager>
           <hashTree/>
         </hashTree>
+        <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Constant Timer" enabled="true">
+          <stringProp name="ConstantTimer.delay">1000</stringProp>
+        </ConstantTimer>
+        <hashTree/>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Register Voter Request" enabled="true">
           <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
@@ -330,6 +338,10 @@ props.put(&quot;district&quot; + counter, district);</stringProp>
           </HeaderManager>
           <hashTree/>
         </hashTree>
+        <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Constant Timer" enabled="true">
+          <stringProp name="ConstantTimer.delay">1000</stringProp>
+        </ConstantTimer>
+        <hashTree/>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Write Vote Request" enabled="true">
           <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
@@ -460,6 +472,10 @@ vars.put(&quot;VOTE_CHOICE&quot;, choice);</stringProp>
           <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
         </HTTPSamplerProxy>
         <hashTree/>
+        <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Constant Timer" enabled="true">
+          <stringProp name="ConstantTimer.delay">1000</stringProp>
+        </ConstantTimer>
+        <hashTree/>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="voter reg record Request" enabled="true">
           <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
@@ -500,8 +516,12 @@ vars.put(&quot;VOTE_CHOICE&quot;, choice);</stringProp>
           </HeaderManager>
           <hashTree/>
         </hashTree>
+        <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Constant Timer" enabled="true">
+          <stringProp name="ConstantTimer.delay">1000</stringProp>
+        </ConstantTimer>
+        <hashTree/>
         <CounterConfig guiclass="CounterConfigGui" testclass="CounterConfig" testname="User Counter" enabled="true">
-          <stringProp name="CounterConfig.start">500</stringProp>
+          <stringProp name="CounterConfig.start">100</stringProp>
           <stringProp name="CounterConfig.end"></stringProp>
           <stringProp name="CounterConfig.incr">1</stringProp>
           <stringProp name="CounterConfig.name">userCounter</stringProp>
@@ -513,12 +533,12 @@ vars.put(&quot;VOTE_CHOICE&quot;, choice);</stringProp>
           <collectionProp name="Arguments.arguments">
             <elementProp name="modulus" elementType="Argument">
               <stringProp name="Argument.name">modulus</stringProp>
-              <stringProp name="Argument.value">ALIgdt3Gx9UMqfLwPMDw8U1v0X0ah5+ZII8AV/Ung/05LTxbudeLF2Cct6UtSz/C0s4uyZiGRxdyoJs+m4V0YB86qalLGjAo3CsJe7ge/to+lKYwQ9Tp/3Xm42Q3bMNg72rkuSYdQaSLN1Qil60pfk7tzb0l76MIv4LaR0W3+0/7p6XexMmU7ZUAsS0yXiPXI17GgE8dWc7L4qZjPbpzFD9Q/dDEfqXk6r/NKkOsHOB0VpOX4AeIIo3OuSYebt//zQVr7BHPL+eaS8WGu18FOfRSPM5s9ajaZCLfaQiQTvDpg+WnGQNMdiiqz1OF8EBf/jPlmvMRw52e7Krd8Thi7P8=</stringProp>
+              <stringProp name="Argument.value">APM6V0lhV8ajNkBxD5yEEEYeq+fOYj947fkZwYdtaaV9wq6CB3/vbx8AWYIn+5r8Laq6YtdH/Kkvrd69E1tp856ktoansSOp/aYUKmq6VqOH4thEyYXWhTCpstNWoC5XqH5kf4iWdhE4NiLPlRoyQf1aSg25jmobaW8XO2pUVKV+XFiNDWTpv0T/All0xOtNGxrI1IsHcWOpVgjal8XSeTqHAWQT1DYO8fnhusYtRwYIKjGasIQv6CxLnNaLdz0CqysR9/AayIHPxRM2ElIyOowYeefVX2GhMJ2bu9FRaA5bJSyNAPgsAcnTZXWA1gOCqF4bGwf+5o6ohjcXFAvIXIc=</stringProp>
               <stringProp name="Argument.metadata">=</stringProp>
             </elementProp>
             <elementProp name="privateExponent" elementType="Argument">
               <stringProp name="Argument.name">privateExponent</stringProp>
-              <stringProp name="Argument.value">Ah022/NShtmjdhHaNBNdVyUccDwtijw33Iqiq0hgnX5IEP8pCau0ciiaA2Ncu8Z/ra50z73JlTfT5n52kRMXBaKIG01xY6CbMFrooCr6Al7GG+Isbpf9DgoDU+VWgfZ3ZlDi+QFVjfLltrbBucPpebKtLkayJ+tgKS5BtKGg4XZJkQaYdh1gsiz2qYLqX3BGEWvxH4z5HVup7xCj8XBF/LwxvXR/O/hVCY774E6iA7icXes1odolflZOjnb3kBxgC31ZE3fWILFIKMIT5dJLHOrQjCiC2CqGmE0fQy5Ozfp3c3c68p3BWvMRt4KQ6mbFoLzNpCXvz+8x83qiRwqbcQ==</stringProp>
+              <stringProp name="Argument.value">BXK9GcuwZ6aoRHFD5EGhC7EMMLkSwlE3I2lMSHhO8YILplULTfZTCuK7Hos+u44Ch9x88k2Of0uuHVsm39lTt64A2KtQ8HeSUvIIsTNTVX5pumZwDSts+FYUx18dX2xfPdWKdcjJBEG6FLWJpXiSudYX6o7Jfd73UaG3lv4kl0BeKyLTWCtpZdNEBaQ4dm9zlXwMydDGpgfuIyyiLPg6p5NMded02yMnY4LEp9eAnKfLyKf/5vBGiG8NP441ZKHvU/v+vyBJ/404Qy/75cjYMs9qL1sf109bkHZ9n2kb0Es7oB8BK2Rn0YV6WDFmI7uv6CrXdpmMEFwkQQK6JV9JoQ==</stringProp>
               <stringProp name="Argument.metadata">=</stringProp>
             </elementProp>
             <elementProp name="publicExponent" elementType="Argument">
@@ -528,7 +548,7 @@ vars.put(&quot;VOTE_CHOICE&quot;, choice);</stringProp>
             </elementProp>
             <elementProp name="registrarName" elementType="Argument">
               <stringProp name="Argument.name">registrarName</stringProp>
-              <stringProp name="Argument.value">test1</stringProp>
+              <stringProp name="Argument.value">Connor</stringProp>
               <stringProp name="Argument.metadata">=</stringProp>
             </elementProp>
           </collectionProp>
